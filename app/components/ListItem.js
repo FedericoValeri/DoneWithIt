@@ -14,17 +14,19 @@ export default function ListItem({
 }) {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Swipeable renderRightActions={renderRightActions}>
-        <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
-          <View style={styles.container}>
-            <Image style={styles.image} source={image} />
-            <View>
-              <AppText style={styles.title}>{title}</AppText>
-              <AppText style={styles.subTitle}>{subTitle}</AppText>
+      {
+        <Swipeable renderRightActions={renderRightActions}>
+          <TouchableHighlight underlayColor={colors.light} onPress={onPress}>
+            <View style={styles.container}>
+              <Image style={styles.image} source={image} />
+              <View>
+                <AppText style={styles.title}>{title}</AppText>
+                <AppText style={styles.subTitle}>{subTitle}</AppText>
+              </View>
             </View>
-          </View>
-        </TouchableHighlight>
-      </Swipeable>
+          </TouchableHighlight>
+        </Swipeable>
+      }
     </GestureHandlerRootView>
   );
 }
