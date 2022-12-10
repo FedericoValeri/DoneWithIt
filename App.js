@@ -9,11 +9,12 @@ import MessagesScreen from "./app/screens/MessagesScreen";
 import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import ListingsScreen from "./app/screens/ListingsScreen";
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {<AccountScreen />}
+      {<ListingsScreen />}
     </GestureHandlerRootView>
   );
 }
