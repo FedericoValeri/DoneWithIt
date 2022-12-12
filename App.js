@@ -10,11 +10,16 @@ import ViewImageScreen from "./app/screens/ViewImageScreen";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import ListingsScreen from "./app/screens/ListingsScreen";
+import AppTextInput from "./app/components/AppTextInput";
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {<ListingsScreen />}
+      {
+        <Screen>
+          <AppTextInput placeholder="Username" icon="email" />
+        </Screen>
+      }
     </GestureHandlerRootView>
   );
 }
