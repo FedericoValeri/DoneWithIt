@@ -14,11 +14,12 @@ import AppTextInput from "./app/components/AppTextInput";
 import AppPicker from "./app/components/AppPicker";
 import { useState } from "react";
 import LoginScreen from "./app/screens/LoginScreen";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {<LoginScreen />}
+      {<ListingEditScreen />}
     </GestureHandlerRootView>
   );
 }
