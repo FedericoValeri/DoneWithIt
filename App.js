@@ -12,25 +12,9 @@ import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
 
 export default function App() {
-  const [imageUris, setImageUris] = useState([]);
-
-  const handleAdd = (uri) => {
-    setImageUris([...imageUris, uri]);
-  };
-
-  const handleRemove = (uri) => {
-    setImageUris(imageUris.filter((imageUri) => imageUri !== uri));
-  };
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Screen>
-        <ImageInputList
-          imageUris={imageUris}
-          onAddImage={(uri) => handleAdd(uri)}
-          onRemoveImage={(uri) => handleRemove(uri)}
-        />
-      </Screen>
+      <ListingEditScreen />
     </GestureHandlerRootView>
   );
 }
