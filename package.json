@@ -18,7 +18,8 @@
     "react-native": "0.70.5",
     "react-native-gesture-handler": "~2.8.0",
     "yup": "^0.32.11",
-    "expo-image-picker": "~14.0.2"
+    "expo-image-picker": "~14.0.2",
+    "expo-location": "~15.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
