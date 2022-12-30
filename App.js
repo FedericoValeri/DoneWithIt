@@ -11,11 +11,19 @@ import { Button, Image, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 
-const Tweets = () => (
+const Link = () => {
+  const navigation = useNavigation();
+  return (
+    <Button title="Click" onPress={() => navigation.navigate("TweetDetails")} />
+  );
+};
+
+const Tweets = ({ navigation }) => (
   <Screen>
     <Text>Tweets</Text>
+    <Link />
   </Screen>
 );
 
@@ -29,7 +37,7 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen name="Tweets" component={Tweets} />
-    <Stack.Screen name="Tweet Details" component={TweetDetails} />
+    <Stack.Screen name="TweetDetails" component={TweetDetails} />
   </Stack.Navigator>
 );
 
