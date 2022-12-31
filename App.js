@@ -14,6 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AuthNavigator from "./app/navigation/AuthNavigator";
 
 const Tweets = ({ navigation }) => (
   <Screen>
@@ -89,7 +90,7 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <NavigationContainer>
-        <TabNavigator />
+        <AuthNavigator />
       </NavigationContainer>
     </GestureHandlerRootView>
   );
