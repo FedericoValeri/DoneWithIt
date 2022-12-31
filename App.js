@@ -38,7 +38,7 @@ const Account = () => (
 );
 
 const Stack = createNativeStackNavigator();
-const StackNavigator = () => (
+const FeedNavigator = () => (
   <Stack.Navigator
     screenOptions={{
       headerStyle: { backgroundColor: "dodgerblue" },
@@ -66,7 +66,7 @@ const TabNavigator = () => (
   >
     <Tab.Screen
       name="Feed"
-      component={Tweets}
+      component={FeedNavigator}
       options={{
         tabBarIcon: ({ size, color }) => (
           <MaterialCommunityIcons name="home" size={size} color={color} />
