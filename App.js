@@ -10,7 +10,7 @@ import ImageInputList from "./app/components/ImageInputList";
 import { Button, Image, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -40,7 +40,7 @@ const Account = () => (
   </Screen>
 );
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 const FeedNavigator = () => (
   <Stack.Navigator
     screenOptions={{
