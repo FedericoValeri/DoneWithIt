@@ -17,13 +17,14 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import AuthNavigator from "./app/navigation/AuthNavigator";
 import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
+import routes from "./app/navigation/routes";
 
 const Tweets = ({ navigation }) => (
   <Screen>
     <Text>Tweets</Text>
     <Button
       title="View Tweet"
-      onPress={() => navigation.navigate("TweetDetails", { id: 1 })}
+      onPress={() => navigation.navigate(routes.TWEETS_DETAILS, { id: 1 })}
     />
   </Screen>
 );
