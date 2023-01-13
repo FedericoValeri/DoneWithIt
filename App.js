@@ -7,7 +7,7 @@ import LoginScreen from "./app/screens/LoginScreen";
 import AccountScreen from "./app/screens/AccountScreen";
 import Screen from "./app/components/Screen";
 import ImageInputList from "./app/components/ImageInputList";
-import { Button, Image, Text } from "react-native";
+import { Button, Image, Text, StyleSheet, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";

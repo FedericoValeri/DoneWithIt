@@ -7,10 +7,12 @@ import routes from "../navigation/routes";
 import listingsApi from "../api/listings";
 import AppText from "../components/AppText";
 import Button from "../components/AppButton";
+import ActivityIndicator from "../components/ActivityIndicator";
 
 export default function ListingsScreen({ navigation }) {
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadListings();
@@ -18,11 +20,18 @@ export default function ListingsScreen({ navigation }) {
 
   const loadListings = async () => {
     console.log("Load listings function is executed.");
+
+    // 1. Call the server and control the loading animation
+    setLoading(true);
     const response = await listingsApi.getListings();
+    setLoading(false);
+
+    // 2. Show error if occurs
     if (!response.ok) {
       console.log("response is false");
       return setError(true);
     }
+    // 3. In case we don't have any errors
     setError(false);
     setListings(response.data);
   };
@@ -35,6 +44,7 @@ export default function ListingsScreen({ navigation }) {
           <Button title="Retry" onPress={loadListings} />
         </>
       )}
+      <ActivityIndicator visible={loading} />
       <FlatList
         data={listings}
         keyExtractor={(listing) => listing.id.toString()}
