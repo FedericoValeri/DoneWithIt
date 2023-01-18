@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import listingsApi from "../api/listings";
 import ActivityIndicator from "../components/ActivityIndicator";
@@ -22,7 +22,7 @@ export default function ListingsScreen({ navigation }) {
       {getListingsApi.error && (
         <>
           <AppText>Couldn't retrive the listings.</AppText>
-          <Button title="Retry" onPress={loadListings} />
+          <Button title="Retry" onPress={getListingsApi.request} />
         </>
       )}
       <ActivityIndicator visible={getListingsApi.loading} />

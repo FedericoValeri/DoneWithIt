@@ -13,9 +13,9 @@ export default useApi = (apiFunc) => {
 
     // 2. Show error if occurs
     if (!response.ok) {
-      console.log("response is false");
       return setError(true);
     }
+
     // 3. In case we don't have any errors
     setError(false);
     setData(response.data);
