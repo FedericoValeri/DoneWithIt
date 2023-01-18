@@ -19,16 +19,18 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import AppNavigator from "./app/navigation/AppNavigator";
 import routes from "./app/navigation/routes";
 import OfflineNotice from "./app/components/OfflineNotice";
+import AuthContext from "./app/auth/context";
 
 export default function App() {
+  const [user, setUser] = useState();
   return (
-    <>
+    <AuthContext.Provider value={{ user, setUser }}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <OfflineNotice />
         <NavigationContainer theme={navigationTheme}>
-          <AuthNavigator />
+          {user ? <AppNavigator /> : <AuthNavigator />}
         </NavigationContainer>
       </GestureHandlerRootView>
-    </>
+    </AuthContext.Provider>
   );
 }
