@@ -9,6 +9,7 @@ import {
 } from "../components/forms";
 import Screen from "../components/Screen";
 import authApi from "../api/auth";
+import jwtDecode from "jwt-decode";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -23,9 +24,9 @@ export default function LoginScreen() {
     if (!result.ok) {
       return setLoginFailed(true);
     }
-
     setLoginFailed(false);
-    console.log(result.data);
+    const user = jwtDecode(result.data);
+    console.log(user);
   };
 
   return (
