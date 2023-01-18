@@ -13,7 +13,6 @@ apiClient.get = async (url, params, axiosConfig) => {
 
   // Store data in the cache
   if (response.ok) {
-    console.log("DATA CACHED");
     cache.store(url, response.data);
     return response;
   }
