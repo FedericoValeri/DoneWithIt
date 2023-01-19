@@ -1,30 +1,21 @@
+import { NavigationContainer } from "@react-navigation/native";
+import * as SplashScreen from "expo-splash-screen";
+import jwtDecode from "jwt-decode";
+import { useCallback, useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
-import ListingsScreen from "./app/screens/ListingsScreen";
-import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
-import MessagesScreen from "./app/screens/MessagesScreen";
-import LoginScreen from "./app/screens/LoginScreen";
-import AccountScreen from "./app/screens/AccountScreen";
-import Screen from "./app/components/Screen";
-import ImageInputList from "./app/components/ImageInputList";
-import { Button, Image, Text, StyleSheet, View } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import { useEffect, useState } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AuthNavigator from "./app/navigation/AuthNavigator";
-import navigationTheme from "./app/navigation/navigationTheme";
-import AppNavigator from "./app/navigation/AppNavigator";
-import routes from "./app/navigation/routes";
-import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
-import jwtDecode from "jwt-decode";
+import OfflineNotice from "./app/components/OfflineNotice";
+import AppNavigator from "./app/navigation/AppNavigator";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import navigationTheme from "./app/navigation/navigationTheme";
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [user, setUser] = useState();
+  const [appIsReady, setAppIsReady] = useState(false);
 
   const restoreToken = async () => {
     const token = await authStorage.getToken();
@@ -32,13 +23,40 @@ export default function App() {
     setUser(jwtDecode(token));
   };
 
+  const prepare = async () => {
+    try {
+      // Make any API calls you need to do here
+      restoreToken();
+    } catch (e) {
+      console.warn(e);
+    } finally {
+      // Tell the application to render
+      setAppIsReady(true);
+    }
+  };
+
   useEffect(() => {
-    restoreToken();
+    prepare();
   }, []);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      // This tells the splash screen to hide immediately! If we call this after
+      // `setAppIsReady`, then we may see a blank screen while the app is
+      // loading its initial state and rendering its first pixels. So instead,
+      // we hide the splash screen once we know the root view has already
+      // performed layout.
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+  if (!appIsReady) {
+    return null;
+  }
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView onLayout={onLayoutRootView} style={{ flex: 1 }}>
         <OfflineNotice />
         <NavigationContainer theme={navigationTheme}>
           {user ? <AppNavigator /> : <AuthNavigator />}
