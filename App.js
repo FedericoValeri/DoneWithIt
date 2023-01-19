@@ -1,6 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import * as SplashScreen from "expo-splash-screen";
-import jwtDecode from "jwt-decode";
 import { useCallback, useEffect, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import AuthContext from "./app/auth/context";
@@ -17,16 +16,15 @@ export default function App() {
   const [user, setUser] = useState();
   const [appIsReady, setAppIsReady] = useState(false);
 
-  const restoreToken = async () => {
-    const token = await authStorage.getToken();
-    if (!token) return;
-    setUser(jwtDecode(token));
+  const restoreUser = async () => {
+    const user = await authStorage.getUser();
+    if (user) setUser(user);
   };
 
   const prepare = async () => {
     try {
       // Make any API calls you need to do here
-      restoreToken();
+      restoreUser();
     } catch (e) {
       console.warn(e);
     } finally {
