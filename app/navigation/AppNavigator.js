@@ -8,6 +8,7 @@ import NewListingButton from "./NewListingButton";
 import routes from "./routes";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import expoPushTokensApi from "../api/expoPushTokens";
 
 const Tab = createBottomTabNavigator();
 
@@ -61,7 +62,7 @@ const AppNavigator = () => {
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
+      expoPushTokensApi.register(token);
     } else {
       alert("Must use physical device for Push Notifications");
     }
