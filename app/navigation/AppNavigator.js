@@ -9,6 +9,7 @@ import routes from "./routes";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import expoPushTokensApi from "../api/expoPushTokens";
+import navigation from "./rootNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -82,6 +83,8 @@ const AppNavigator = () => {
 
     responseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
+        // Go to specified screen when tapping the notification
+        navigation.navigate("Account");
         console.log(response);
       });
 
